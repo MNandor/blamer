@@ -18,6 +18,9 @@ while true; do
 	done
 
 	commt=`echo $commits | sed 's/[a-z]/\u\0/' | cut -d' ' -f $((sel + 1))`
+	commtc=`echo $commits | wc -w`
+	echo $commtc
+
 
 	echo
 
@@ -29,10 +32,10 @@ while true; do
 
 	echo -e "\n$diff$commt - h/l to switch commit, d to toggle diff, q to quit"
 	read -n 1 -s key
-	if [ $key == 'l' ]; then
+	if [ $key == 'l' ] && (( $sel < $commtc - 1 )); then
 		sel=$(($sel + 1))
 	fi
-	if [ $key == 'h' ]; then
+	if [ $key == 'h' ] && [ "$sel" -gt 0 ]; then
 		sel=$(($sel - 1))
 	fi
 	if [ $key == 'd' ]; then
