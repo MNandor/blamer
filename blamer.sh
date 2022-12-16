@@ -27,7 +27,7 @@ while true; do
 		git show $commt:$@
 	fi
 
-	echo -e "\n$diff$commt - h/l to switch commit"
+	echo -e "\n$diff$commt - h/l to switch commit, d to toggle diff, q to quit"
 	read -n 1 -s key
 	if [ $key == 'l' ]; then
 		sel=$(($sel + 1))
@@ -42,6 +42,9 @@ while true; do
 		elif [ "$diff" == ':' ]; then
 			diff=''
 		fi
+	fi
+	if [ $key == 'q' ]; then
+		break
 	fi
 
 done
